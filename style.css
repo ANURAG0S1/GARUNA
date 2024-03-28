@@ -112,6 +112,12 @@ table td {
     padding: 4px 10px;
 }
 
+table td  li{
+    margin-left: 28px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
 
 .t-gray {
     color: gray;

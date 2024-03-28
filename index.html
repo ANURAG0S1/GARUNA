@@ -1,129 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Invoice Generator</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Invoice Generator</title>
-</head>
-
-<body id="main" onload="afterLoad()">
-  <div id="menu" class="noprint p-10 abs">
-    <ul>
-      <li onclick="printt()" noedit>print</li>
-      <li onclick="showAddTaskForm()" noedit>task form</li>
-    </ul>
-  </div>
-  <section class="main p-10 p-hr-4">
-    <!-- Header  -->
-    <div class="header d-flex p-hr-3 p-vr-4">
-      <div class="my-address">
-        <div class="p-20"></div>
-        <h1 class="logo f-m accent">Clickers</h1>
-        <b>Anurag Kushwaha</b>
-        <br />
-        Manesar, Harayana, Gurgaon
-        <br />
-        122051 ( IN )
-        <br />
-        +91 85878 22762
+  <body id="main" onload="afterLoad()">
+    <div id="menu" class="noprint p-10 abs">
+      <ul>
+        <li onclick="printt()" noedit>print</li>
+        <li onclick="showAddTaskForm()" noedit>task form</li>
+      </ul>
+    </div>
+    <section class="main p-10 p-hr-4">
+      <!-- Header  -->
+      <div class="header d-flex p-hr-3 p-vr-4">
+        <div class="my-address">
+          <div class="p-20"></div>
+          <h1 class="logo f-m accent">Clickers</h1>
+          <b>Anurag Kushwaha</b>
+          <br />
+          Manesar, Harayana, Gurgaon
+          <br />
+          122051 ( IN )
+          <br />
+          +91 85878 22762
+        </div>
+        <div>
+          <h1 class="f-l t-gray">INVOICE</h1>
+        </div>
       </div>
-      <div>
-        <h1 class="f-l t-gray">INVOICE</h1>
+
+      <!-- Billing and invoice info  -->
+      <div class="d-flex w-100 p-hr-3 p-vr-4">
+        <div>
+          <b class="bold">BILL TO:</b>
+          <br />
+          Rungta College of Engineering and Technology <br />
+          Rungta Educational Campus, Bhilai <br />
+          Khoka-kurud Road, Bhilai - 490024, Chhattisgarh,India <br />
+          Tel : 9015 152152 <br />
+          Email : info@rungta.ac.in
+        </div>
+        <div>
+          <b class="bold">INVOICE NO : </b> <span id="inv-num">041</span><br />
+          <b class="bold">INVOICE DATE : </b>
+          <span id="inv-date">29-03-2024</span> <br />
+          <b class="bold">DUE DATE : </b> <span id="due-date">04-04-2024</span>
+        </div>
       </div>
-    </div>
 
-    <!-- Billing and invoice info  -->
-    <div class="d-flex w-100 p-hr-3 p-vr-4">
-      <div>
-        <b class="bold">BILL TO:</b>
-        <br />
-        <span id="biller-name">Rungta Educational Campus</span><br />
-        Khoka-kurud Road, <br>
-        Bhilai - 490024, Chhattisgarh,India
+      <!-- task description and price  -->
+      <div class="m-hr-3">
+        <table id="table" class="w-100">
+          <thead>
+            <tr>
+              <td>Task</td>
+
+              <td>Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <h3>RCPSR</h3>
+                <ul>
+                  <li>200+ pdf uploads</li>
+                  <li>NAAC page update</li>
+                </ul>
+              </td>
+              <td>$40</td>
+            </tr>
+            <tr>
+              <td>
+                <h3>RCET</h3>
+                <ul>
+                  <li>Self learning tab update cse course</li>
+                  <li>CRC members update</li>
+                  <li>Balance sheets add/delete</li>
+                </ul>
+              </td>
+              <td>$30</td>
+            </tr>
+            <tr>
+              <td>
+                <h3>GDRCST</h3>
+                <ul>
+                  <li>Academic calendar page update</li>
+                  <li>Achievement page update</li>
+                  <li>Question papers 2020 page</li>
+                  <li>Question papers 2021 page</li>
+                </ul>
+              </td>
+              <td>$40</td>
+            </tr>
+            <tr>
+              <td>
+                <h3>Rungta.ac.in</h3>
+                <ul>
+                  <li>Rungta privacy page update</li>
+                  <li>Social media and removed raipur mentions across site</li>
+                  <li>Banner updates HR conclave</li>
+                  <li>Fees page update</li>
+                  <li>New testimonials added.</li>
+                </ul>
+              </td>
+              <td>$50</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="1">
+                <b> Total </b>
+              </td>
+              <td colspan="1">$ 160</td>
+            </tr>
+            <tr>
+              <td colspan="1">
+                <b> Total (in INR as of 29-03-2024) </b>
+              </td>
+              <td colspan="1">₹ 13,346.06</td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
-      <div>
-        <b class="bold">INVOICE NO : </b> <span id="inv-num">011</span><br />
-        <b class="bold">INVOICE DATE : </b>
-        <span id="inv-date">16-06-2023</span> <br />
-        <b class="bold">DUE DATE : </b> <span id="due-date">24-06-2023</span>
+      <div class="d-flex w-100 p-hr-3">
+        <div></div>
+        <div class="p-vr-3">
+          <b>Total money to be paid : </b>
+          <span class="accent">
+            ₹ <span id="total_sum"> 13,346.06</span> /only
+          </span>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- task description and price  -->
-    <div class="m-hr-3">
-      <table id="table" class="w-100">
-        <thead>
-          <tr>
-            <td>Task</td>
-
-
-            <td>Amount</td>
-          </tr>
-        </thead>
-        <tbody></tbody>
-        <tfoot>
-          <tr>
-            <td colspan="1">
-              <b> Total </b>
-            </td>
-            <td colspan="1">$ 85</td>
-          </tr>
-          <tr>
-            <td colspan="1">
-              <b> Total (in INR as of 25-06-2022) </b>
-            </td>
-            <td colspan="1">₹ 6,651.46</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-    <div class="d-flex w-100 p-hr-3">
-      <div></div>
-      <div class="p-vr-3">
-        <b>Total money to be paid : </b>
-        <span class="accent">
-          ₹ <span id="total_sum">6,651.46</span> /only
-        </span>
+    <div id="popup">
+      <form action="submit()"></form>
+      <div class="task">
+        <input id="task" type="text" placeholder="enter the task done here" />
       </div>
+      <div class="pages">
+        <input id="pages" type="number" placeholder="enter number of pages" />
+      </div>
+      <button type="submit" onclick="submit()">submit</button>
+      <button onclick="hideAddTaskForm()">close</button>
     </div>
-  </section>
+    <br />
 
-  <div id="popup">
-    <form action="submit()"></form>
-    <div class="task">
-      <input id="task" type="text" placeholder="enter the task done here" />
-    </div>
-    <div class="pages">
-      <input id="pages" type="number" placeholder="enter number of pages" />
-    </div>
-    <button type="submit" onclick="submit()">submit</button>
-    <button onclick="hideAddTaskForm()">close</button>
-  </div>
-  <br />
+    <script>
+      function submit() {
+        let task = document.getElementById("task").value;
+        let pages = document.getElementById("pages").value;
 
-  <script>
-    function submit() {
-      let task = document.getElementById("task").value;
-      let pages = document.getElementById("pages").value;
+        let table = document
+          .getElementById("table")
+          .getElementsByTagName("tbody")[0];
 
-      let table = document
-        .getElementById("table")
-        .getElementsByTagName("tbody")[0];
-
-      var myHtmlContent = `
+        var myHtmlContent = `
               <td>${task}</td>
              
               <td>$ ${pages * 5}</td>`;
 
-      var newRow = table.insertRow(table.rows.length);
+        var newRow = table.insertRow(table.rows.length);
 
-      newRow.innerHTML = myHtmlContent;
-    }
-  </script>
-  <script src="./script.js"></script>
-</body>
-
+        newRow.innerHTML = myHtmlContent;
+      }
+    </script>
+    <script src="./script.js"></script>
+  </body>
 </html>
