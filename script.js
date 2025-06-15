@@ -5,31 +5,32 @@ function printt() {
 /**
  * provides a popup notification alert type of thing
  */
+/**
+ * Creates and displays a temporary alert popup on the page
+ * @function alert
+ * @description Creates a div element with class 'abs-popup' that serves as an alert popup.
+ * The popup includes a close button and automatically disappears after a set duration.
+ * If an alert popup already exists, the function does nothing to prevent multiple popups.
+ * @example
+ * alert();
+ * @returns {void}
+ */
 function alert() {
-  let timing = 4000;
-  if (document.getElementById("alert-popup")) {
-  } else {
-    let elem = document.getElementById("main");
-    let popup = document.createElement("div");
-    let closeButton = document.createElement("span");
-    closeButton.className = "closeButton";
-    popup.style.animationDuration = timing;
+  const timing = 4000;
+  const existingPopup = document.getElementById("alert-popup");
+  if (existingPopup) return;
 
-    closeButton.innerText = "+";
-    closeButton.addEventListener("click", (event) => {
-      deletepopup();
-    });
+  const popup = document.createElement("div");
+  popup.id = "alert-popup";
+  popup.className = "abs-popup";
+  popup.style.animationDuration = `${timing}ms`;
+  popup.innerHTML = `
+    alert for 2 sec
+    <span class="closeButton" onclick="deletepopup()">+</span>
+  `;
 
-    popup.id = "alert-popup";
-    popup.className = "abs-popup";
-    popup.innerHTML = "alert for 2 sec";
-
-    popup.appendChild(closeButton);
-    elem.appendChild(popup);
-    setTimeout(() => {
-      document.getElementById("alert-popup").remove();
-    }, timing - 300);
-  }
+  document.getElementById("main").appendChild(popup);
+  setTimeout(deletepopup, timing - 300);
 }
 function deletepopup() {
   if (document.getElementById("alert-popup")) {
