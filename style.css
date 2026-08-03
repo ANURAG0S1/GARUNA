@@ -16,6 +16,21 @@
     font-family: 'Roboto', sans-serif;
 }
 
+html {
+    color-scheme: light;
+}
+
+body {
+    background: #ffffff;
+    color: #000000;
+}
+
+.main {
+    background: #ffffff;
+    color: #000000;
+    min-height: 100vh;
+}
+
 *[contenteditable="true"] {
     opacity: 0.8;
 }
@@ -159,12 +174,20 @@ table td  li{
 
 
 .accent {
-    color: rgb(15, 95, 199);
+    color: #2c6ab0;
 }
 
 .bold {
     color: gray;
     font-weight: 900;
+}
+
+.bank-details {
+    line-height: 1.7;
+}
+
+.bank-details b:not(.bold) {
+    color: #000;
 }
 
 
@@ -182,6 +205,7 @@ table td  li{
 }
 
 #popup {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
