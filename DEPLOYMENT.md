@@ -51,7 +51,9 @@ it as-is at `anurag-kushwaha.in/invoice/`.
 2. On render.com: New → Web Service → connect the `GARUNA` repo.
    - **Root Directory**: `invoice-generator`
    - Build command: `npm install`
-   - Start command: `npm run server`
+   - Start command: `npm run server` (this runs `node server/index.js` directly — Render
+     injects MONGODB_URI into process.env itself, so no --env-file is needed there;
+     `npm run server:local` is the local-dev equivalent that reads atlas-credentials.env)
    - Add env var `MONGODB_URI` = your Atlas connection string
 3. Deploy. Note the resulting URL, e.g. `https://invoice-api-xxxx.onrender.com`.
 4. Free tier sleeps after ~15 min idle — first request after a while takes ~30s.
