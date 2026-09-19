@@ -1,10 +1,16 @@
 # Deploying anurag-kushwaha.in with /invoice
 
-Everything now lives under `~/Github/GARUNA/`:
+`GARUNA` is now a single monorepo (one git history, invoice-generator's
+history preserved via a subtree merge):
+
 - `GARUNA/site` — main portfolio (React 19 + Vite) → Vercel, domain root `/`
 - `GARUNA/invoice-generator` — invoice app; its frontend build gets copied into
   `site/public/invoice/` (static, HashRouter — no server rewrite needed)
 - `/api/*` on the domain → invoice-generator's Express + MongoDB backend → Render (free web service)
+
+Both `site` and `invoice-generator` deploy as **separate projects** on their
+respective platforms, both pointed at this **same repo**, each with its own
+"Root Directory" setting (see steps 4 and 5).
 
 ## 1. Build the invoice app locally (in Terminal, not through Claude — needs real npm registry access)
 
@@ -14,15 +20,23 @@ npm install        # only if node_modules is missing/stale
 npm run build       # outputs dist/
 ```
 
-## 2. Copy the build into the site
+Or just run the combined script from the repo root:
+
+```bash
+cd ~/Github/GARUNA
+./sync-invoice.sh   # builds invoice-generator AND copies dist/ into site/public/invoice
+```
+
+## 2. Copy the build into the site (skip if you used sync-invoice.sh above)
 
 ```bash
 rm -rf ~/Github/GARUNA/site/public/invoice
 cp -r ~/Github/GARUNA/invoice-generator/dist ~/Github/GARUNA/site/public/invoice
 ```
 
-Repeat steps 1–2 any time you change the invoice app. `site/public/invoice` gets copied
-as-is into the site's build output, so it will be served at `anurag-kushwaha.in/invoice/`.
+Repeat before every push that changes the invoice app — `site/public/invoice` is
+committed as source (not a build artifact of `site` itself), so Vercel just serves
+it as-is at `anurag-kushwaha.in/invoice/`.
 
 ## 3. MongoDB Atlas (free)
 
@@ -33,8 +47,9 @@ as-is into the site's build output, so it will be served at `anurag-kushwaha.in/
 
 ## 4. Backend on Render (free)
 
-1. Push `GARUNA/invoice-generator` to its own GitHub repo (it isn't one yet — `git init` it if needed).
-2. On render.com: New → Web Service → connect that repo.
+1. Push this repo (`GARUNA`) to GitHub.
+2. On render.com: New → Web Service → connect the `GARUNA` repo.
+   - **Root Directory**: `invoice-generator`
    - Build command: `npm install`
    - Start command: `npm run server`
    - Add env var `MONGODB_URI` = your Atlas connection string
@@ -43,9 +58,11 @@ as-is into the site's build output, so it will be served at `anurag-kushwaha.in/
 
 ## 5. Wire up the domain
 
-1. Edit `GARUNA/site/vercel.json` (already created) and replace
+1. Edit `site/vercel.json` (already created) and replace
    `YOUR-RENDER-SERVICE.onrender.com` with your actual Render URL from step 4.
-2. On vercel.com: New Project → import the `GARUNA/site` repo. Framework preset: Vite. Deploy.
+2. On vercel.com: New Project → import the `GARUNA` repo.
+   - **Root Directory**: `site`
+   - Framework preset: Vite. Deploy.
 3. In Vercel project settings → Domains, attach `anurag-kushwaha.in` (update your DNS
    registrar's records to point at Vercel, following Vercel's on-screen instructions).
 
